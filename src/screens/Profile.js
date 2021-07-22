@@ -49,7 +49,7 @@ class Profile extends React.Component {
                     this.props.setUser({user: null});
                   console.log('LOS PROPPPS =>', this.props);
                   try {
-                    await AsyncStorage.delItem('isloged');
+                    await AsyncStorage.removeItem('isloged');
                   } catch (e) {
                     console.log('hubo un error :' + e);
                   }

@@ -14,7 +14,6 @@ import {commonStyles} from '../styles/mainStyles';
 
 import {connect} from 'react-redux';
 import {actions} from '../store';
-
 import auth from '@react-native-firebase/auth';
 import {
   GoogleSignin,
@@ -39,13 +38,10 @@ class Login extends Component {
   }
   onGoogleButtonPress = async () => {
     // Get the users ID token
-    console.log('Entro en la funcion de GoogleButton');
     const {idToken} = await GoogleSignin.signIn();
     // Create a Google credential with the token
-    console.log('Paso la linea 43');
     const googleCredential = auth.GoogleAuthProvider.credential(idToken);
     // Sign-in the user with the credential
-    console.log('Paso la linea 46');
 
     return auth().signInWithCredential(googleCredential);
   };
