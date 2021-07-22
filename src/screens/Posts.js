@@ -6,17 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {styles} from '../styles/mainStyles';
+import {commonStyles} from '../styles/mainStyles';
 
 export default class Posts extends Component {
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={commonStyles.container}>
         <ImageBackground
           style={{flex: 1}}
           source={require('../assets/images/pexels-j-lee-7003328.jpg')}>
-          <View style={styles.views}>
-            <Text style={styles.text}>PANTALLA POSTS</Text>
+          <View style={commonStyles.views}>
+            <Text style={commonStyles.text}>PANTALLA POSTS</Text>
           </View>
         </ImageBackground>
       </SafeAreaView>

@@ -7,7 +7,7 @@ import {
   View,
   Alert,
 } from 'react-native';
-import {styles} from '../styles/mainStyles';
+import {commonStyles} from '../styles/mainStyles';
 
 export default class Home extends Component {
   _onHomePress = () => {
@@ -18,32 +18,41 @@ export default class Home extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={commonStyles.container}>
         <ImageBackground
           style={{flex: 1}}
           source={require('../assets/images/pexels-j-lee-7003328.jpg')}>
-          <View style={styles.views}>
+          <View style={commonStyles.views}>
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 onPress={() => this._onHomePress()}
-                style={[styles.button, styles.simpleButtonContainer]}>
-                <Text style={styles.text2}>Principal</Text>
+                style={[
+                  commonStyles.button,
+                  commonStyles.simpleButtonContainer,
+                ]}>
+                <Text style={commonStyles.text2}>Principal</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.button, styles.simpleButtonContainer]}>
-                <Text style={styles.text2}>Perfil</Text>
+                style={[
+                  commonStyles.button,
+                  commonStyles.simpleButtonContainer,
+                ]}>
+                <Text style={commonStyles.text2}>Perfil</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity style={[styles.button, {}]}>
-                <Text style={styles.text2}>Posteos</Text>
+              <TouchableOpacity style={[commonStyles.button, {}]}>
+                <Text style={commonStyles.text2}>Posteos</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[styles.button, styles.simpleButtonContainer]}>
-                <Text style={styles.text2}>Mapa</Text>
+                style={[
+                  commonStyles.button,
+                  commonStyles.simpleButtonContainer,
+                ]}>
+                <Text style={commonStyles.text2}>Mapa</Text>
               </TouchableOpacity>
             </View>
           </View>
