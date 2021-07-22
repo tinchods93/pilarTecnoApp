@@ -2,12 +2,16 @@ import React, {Component} from 'react';
 import {
   SafeAreaView,
   Text,
+  StyleSheet,
   ImageBackground,
+  Dimensions,
   TouchableOpacity,
   View,
   Alert,
 } from 'react-native';
 import {commonStyles} from '../styles/mainStyles';
+
+const {height, width} = Dimensions.get('window');
 
 export default class Home extends Component {
   _onHomePress = () => {
@@ -26,33 +30,28 @@ export default class Home extends Component {
             <View style={{flexDirection: 'row'}}>
               <TouchableOpacity
                 onPress={() => this._onHomePress()}
-                style={[
-                  commonStyles.button,
-                  commonStyles.simpleButtonContainer,
-                ]}>
-                <Text style={commonStyles.text2}>Principal</Text>
+                style={styles.homeButton}>
+                <Text style={styles.homeButtonText}>Principal</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[
-                  commonStyles.button,
-                  commonStyles.simpleButtonContainer,
-                ]}>
-                <Text style={commonStyles.text2}>Perfil</Text>
+                style={styles.homeButton}
+                onPress={() => this.props.navigation.navigate('Profile')}>
+                <Text style={styles.homeButtonText}>Perfil</Text>
               </TouchableOpacity>
             </View>
 
             <View style={{flexDirection: 'row'}}>
-              <TouchableOpacity style={[commonStyles.button, {}]}>
-                <Text style={commonStyles.text2}>Posteos</Text>
+              <TouchableOpacity
+                style={styles.homeButton}
+                onPress={() => this.props.navigation.navigate('Posts')}>
+                <Text style={styles.homeButtonText}>Posteos</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
-                style={[
-                  commonStyles.button,
-                  commonStyles.simpleButtonContainer,
-                ]}>
-                <Text style={commonStyles.text2}>Mapa</Text>
+                style={styles.homeButton}
+                onPress={() => this.props.navigation.navigate('Map')}>
+                <Text style={styles.homeButtonText}>Mapa</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -61,3 +60,29 @@ export default class Home extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  homeButton: {
+    backgroundColor: '#E9ECEF',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 6,
+    },
+    shadowOpacity: 0.39,
+    shadowRadius: 8.3,
+
+    elevation: 10,
+    height: height / 8,
+    width: width / 3,
+    borderRadius: 10,
+    justifyContent: 'center',
+    margin: 10,
+  },
+  homeButtonText: {
+    color: '#343A40',
+    textAlign: 'center',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+});

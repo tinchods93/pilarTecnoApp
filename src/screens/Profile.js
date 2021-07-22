@@ -1,11 +1,21 @@
 import React, {Component} from 'react';
-import {SafeAreaView, Dimensions, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  Dimensions,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+} from 'react-native';
 import {connect} from 'react-redux';
 import {Avatar, Button} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
 import {actions} from '../store';
+import {commonStyles} from '../styles/mainStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const {height, width} = Dimensions.get('window');
+
 class Profile extends React.Component {
   constructor(props) {
     super(props);
@@ -27,59 +37,58 @@ class Profile extends React.Component {
   render() {
     const {email, photoURL, name} = this.state;
     return (
-      <SafeAreaView
-        style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <View style={styles.content}>
-          <View style={{alignItems: 'center'}}>
-            <Avatar rounded source={{uri: photoURL}} size="xlarge" />
-            <View style={styles.dataContainer}>
-              <Text style={styles.infoText}>{email}</Text>
-              <Text style={styles.infoText}>{name}</Text>
+      <SafeAreaView style={commonStyles.container}>
+        <View style={commonStyles.views}>
+          <View style={styles.dataContainer}>
+            <View style={styles.avatarContainer}>
+              {photoURL !== '' ? (
+                <Avatar rounded source={{uri: photoURL}} size="xlarge" />
+              ) : (
+                <Avatar
+                  rounded
+                  source={require('../assets/images/avatar.png')}
+                  size="xlarge"
+                />
+              )}
             </View>
+            <Text style={styles.infoText}>{email}</Text>
+            <Text style={styles.infoText}>{name}</Text>
+            <TouchableOpacity
+              style={styles.logoutButton}
+              onPress={() => {
+                auth()
+                  .signOut()
+                  .then(async () => {
+                    console.log('User signed out!'),
+                      this.props.setUser({user: null});
+                    try {
+                      await AsyncStorage.removeItem('isloged');
+                    } catch (e) {
+                      console.log('hubo un error :' + e);
+                    }
+                  });
+              }}>
+              <Text style={commonStyles.primaryBtnText}>Logout</Text>
+            </TouchableOpacity>
           </View>
-        </View>
-        <View style={{flex: 1, top: 50, width: width * 0.5}}>
-          <Button
-            title="Salir"
-            onPress={() => {
-              auth()
-                .signOut()
-                .then(async () => {
-                  console.log('User signed out!'),
-                    this.props.setUser({user: null});
-                  console.log('LOS PROPPPS =>', this.props);
-                  try {
-                    await AsyncStorage.removeItem('isloged');
-                  } catch (e) {
-                    console.log('hubo un error :' + e);
-                  }
-                });
-            }}
-          />
         </View>
       </SafeAreaView>
     );
   }
 }
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 30,
-    fontWeight: 'bold',
-    // color:'#fff',
-    textAlign: 'center',
-  },
-  content: {
-    flex: 1,
-    top: 50,
-    justifyContent: 'center',
-    // alignItems:'center'
-  },
   dataContainer: {
-    top: 50,
+    flex: 1,
+    justifyContent: 'center',
     width,
+    alignItems: 'center',
+  },
+  logoutButton: {
+    height: height / 20,
+    width: width / 3,
+    ...commonStyles.primaryBtn,
   },
   infoText: {
-    textAlign: 'center',
     fontSize: 18,
     color: 'grey',
   },
