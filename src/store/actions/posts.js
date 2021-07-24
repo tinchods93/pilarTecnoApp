@@ -12,7 +12,7 @@ const createPostSuccess = data => {
     data,
   };
 };
-const delPostSuccess = data => {
+const deletePostSuccess = data => {
   return {
     type: DEL_POSTS,
     data,
@@ -43,12 +43,11 @@ export const createPost = data => dispatch => {
     })
     .catch(error => console.log(error));
 };
-export const delpost = data => dispatch => {
-  const {id} = data;
-  return deletePost({id})
+export const removePost = data => dispatch => {
+  return deletePost(data.selectedPost)
     .then(([response, json]) => {
       if (response.ok === true) {
-        dispatch(delPostSuccess({data}));
+        dispatch(deletePostSuccess({index: data.index}));
       }
       return json;
     })

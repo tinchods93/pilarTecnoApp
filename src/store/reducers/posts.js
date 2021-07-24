@@ -33,10 +33,11 @@ export default (state = initialState, action) => {
     };
   }
   if (action.type === DEL_POSTS) {
-    const update = state.posts.filter(post => post.id !== action.data.id);
+    console.log(action);
+    state.posts.splice(action.data.index, 1);
     return {
       ...state,
-      post: update,
+      post: state.posts,
     };
   }
   return {...state};

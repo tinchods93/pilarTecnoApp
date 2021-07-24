@@ -8,6 +8,7 @@ import {
   FlatList,
   StyleSheet,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
 import {actions} from '../store';
 import {capitalize} from '../helpers/capitalizer';
@@ -64,6 +65,13 @@ class Posts extends Component {
       />
     );
   };
+  _delete = () => {
+    const {selectedPost, selectedPostIndex} = this.state;
+    if (selectedPost !== '') {
+      let index = selectedPostIndex;
+      this.props.removePost({selectedPost, index});
+    }
+  };
 
   render() {
     const {current_posts} = this.state;
@@ -86,12 +94,21 @@ class Posts extends Component {
               style={styles.button}>
               <Text style={styles.buttonText}>Edit</Text>
             </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => this._delete()}
+              style={styles.button}>
+              <Text style={styles.buttonText}>Delete</Text>
+            </TouchableOpacity>
           </View>
-          <FlatList
-            data={current_posts}
-            renderItem={this.renderPost}
-            keyExtractor={item => item.id}
-          />
+          {this.state.current_posts === null ? (
+            <ActivityIndicator />
+          ) : (
+            <FlatList
+              data={current_posts}
+              renderItem={this.renderPost}
+              keyExtractor={item => item.id}
+            />
+          )}
         </View>
       </SafeAreaView>
     );
@@ -167,6 +184,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => ({
   getPosts: () => dispatch(actions.posts.getPosts()),
+  removePost: data => dispatch(actions.posts.removePost(data)),
 });
 const mapStateToProps = state => ({
   posts: state.posts.posts,

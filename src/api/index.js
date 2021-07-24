@@ -33,7 +33,7 @@ export const postPosts = async ({title, body}) => {
 ///EDIT POST
 export const patchPost = ({data}) => {
   const {title, body, id, userId} = data;
-  console.log(title, body, id, userId);
+
   return fetch(`${apiUrl}/posts/${id}`, {
     method: 'PATCH',
     body: JSON.stringify({
@@ -46,7 +46,6 @@ export const patchPost = ({data}) => {
       'Content-type': 'application/json; charset=UTF-8',
     },
   }).then(Response => {
-    console.log('Response =>', Response);
     return Promise.all([Response, Response.json()]);
   });
 };
