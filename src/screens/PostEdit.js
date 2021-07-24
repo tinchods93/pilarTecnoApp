@@ -22,18 +22,20 @@ class PostEdit extends Component {
     super(props);
     this.state = {
       data: {},
+      index: '',
     };
   }
   componentDidMount() {
     AsyncStorage.getItem('selectedPost')
       .then(response => {
-        this.setState({data: JSON.parse(response).item});
+        const resp = JSON.parse(response);
+        this.setState({data: resp.item, index: resp.index});
       })
       .catch(e => console.log('Error en Post Details', e));
   }
 
   render() {
-    const {data} = this.state;
+    const {data, index} = this.state;
     return (
       <SafeAreaView style={commonStyles.container}>
         <View style={commonStyles.views}>
@@ -66,7 +68,7 @@ class PostEdit extends Component {
           <TouchableOpacity
             style={commonStyles.primaryBtn}
             onPress={() => {
-              this.props.updatePost(data);
+              this.props.updatePost({data, index});
               this.props.navigation.navigate('Posts');
             }}>
             <Text style={commonStyles.primaryBtnText}>Save Changes</Text>

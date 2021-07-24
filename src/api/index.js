@@ -31,9 +31,11 @@ export const postPosts = async ({title, body}) => {
   });
 };
 ///EDIT POST
-export const patchPost = ({title, body, id, userId}) => {
+export const patchPost = ({data}) => {
+  const {title, body, id, userId} = data;
+  console.log(title, body, id, userId);
   return fetch(`${apiUrl}/posts/${id}`, {
-    method: 'PATH',
+    method: 'PATCH',
     body: JSON.stringify({
       id,
       title,

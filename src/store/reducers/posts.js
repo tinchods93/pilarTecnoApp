@@ -24,15 +24,16 @@ export default (state = initialState, action) => {
     };
   }
   if (action.type === UPDATE_POSTS) {
-    console.log('ACTION=>', action);
-    console.log('STATE=>', state);
-    state.posts[action.data.index] = action.data.item;
+    state.posts[action.data.index] = action.data.data;
+
+    const update = state.posts;
+
     return {
-      state,
+      posts: update,
     };
   }
   if (action.type === DEL_POSTS) {
-    update = state.posts.filter(post => post.id !== action.data.id);
+    const update = state.posts.filter(post => post.id !== action.data.id);
     return {
       ...state,
       post: update,
