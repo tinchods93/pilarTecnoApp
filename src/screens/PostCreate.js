@@ -2,24 +2,98 @@ import React, {Component} from 'react';
 import {
   SafeAreaView,
   Text,
-  ImageBackground,
+  TextInput,
+  StyleSheet,
   TouchableOpacity,
+  Dimensions,
   View,
 } from 'react-native';
+import {actions} from '../store';
+import {connect} from 'react-redux';
+
 import {commonStyles} from '../styles/mainStyles';
 
-export default class PostCreate extends Component {
+const {height, width} = Dimensions.get('window');
+
+class PostCreate extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {
+        title: '',
+        body: '',
+      },
+    };
+  }
+
   render() {
+    const {data} = this.state;
     return (
       <SafeAreaView style={commonStyles.container}>
-        <ImageBackground
-          style={{flex: 1}}
-          source={require('../assets/images/pexels-j-lee-7003328.jpg')}>
-          <View style={commonStyles.views}>
-            <Text style={commonStyles.text}>PANTALLA POST CREATE</Text>
+        <View style={commonStyles.views}>
+          <Text
+            style={{...commonStyles.title, color: '#FFF', fontWeight: 'bold'}}>
+            New Post
+          </Text>
+          <View style={styles.inputBox}>
+            <Text style={styles.titleText}>Title:</Text>
+            <TextInput
+              style={styles.input}
+              value={data.title}
+              multiline={true}
+              onChangeText={input =>
+                this.setState({data: {...data, title: input}})
+              }
+            />
           </View>
-        </ImageBackground>
+          <View style={styles.inputBox}>
+            <Text style={styles.titleText}>Body: </Text>
+            <TextInput
+              style={styles.input}
+              value={data.body}
+              multiline={true}
+              onChangeText={input =>
+                this.setState({data: {...data, body: input}})
+              }
+            />
+          </View>
+          <TouchableOpacity
+            style={commonStyles.primaryBtn}
+            onPress={() => {
+              this.props.createPost(data);
+              this.props.navigation.navigate('Posts');
+            }}>
+            <Text style={commonStyles.primaryBtnText}>Save Changes</Text>
+          </TouchableOpacity>
+        </View>
       </SafeAreaView>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  inputBox: {
+    backgroundColor: '#FFF',
+    width: width * 0.9,
+    marginVertical: 10,
+    overflow: 'hidden',
+    borderRadius: 10,
+    padding: 10,
+  },
+  input: {
+    backgroundColor: '#E3E6EA',
+    borderRadius: 10,
+  },
+  titleText: {
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+});
+
+const mapDispatchToProps = dispatch => ({
+  createPost: data => dispatch(actions.posts.createPost(data)),
+});
+const mapStateToProps = state => ({
+  posts: state.posts.posts,
+});
+export default connect(mapStateToProps, mapDispatchToProps)(PostCreate);

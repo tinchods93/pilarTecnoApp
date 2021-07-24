@@ -27,7 +27,6 @@ class Profile extends React.Component {
   }
   componentDidMount = () => {
     const {user} = this.props;
-    console.log('user profile: ' + JSON.stringify(user));
     this.setState({
       email: user.providerData[0].email,
       photoURL: user.providerData[0].photoURL,
@@ -54,7 +53,7 @@ class Profile extends React.Component {
             <Text style={styles.infoText}>{email}</Text>
             <Text style={styles.infoText}>{name}</Text>
             <TouchableOpacity
-              style={styles.logoutButton}
+              style={commonStyles.primaryBtn}
               onPress={() => {
                 auth()
                   .signOut()
@@ -90,7 +89,7 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 18,
-    color: 'grey',
+    color: '#F7F8F9',
   },
 });
 const mapDispatchToProps = dispatch => ({

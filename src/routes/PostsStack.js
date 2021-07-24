@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Posts from '../screens/Posts';
-import PostDetail from '../screens/PostDetail';
+import {PostDetail} from '../screens/PostDetail';
 import PostEdit from '../screens/PostEdit';
 import PostCreate from '../screens/PostCreate';
 import {createStackNavigator} from '@react-navigation/stack';

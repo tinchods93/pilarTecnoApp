@@ -63,7 +63,7 @@ export default class Home extends Component {
 
 const styles = StyleSheet.create({
   homeButton: {
-    backgroundColor: '#E9ECEF',
+    backgroundColor: '#F7F8F9',
     shadowColor: '#000',
     shadowOffset: {
       width: 0,

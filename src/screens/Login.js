@@ -56,6 +56,7 @@ class Login extends Component {
             <Input
               style={styles.input}
               placeholder="Ingrese email"
+              placeholderTextColor="#8394A5"
               value={email}
               leftIcon={<Icon name="user" style={styles.icons} />}
               onChangeText={em => this.setState({email: em})}
@@ -64,6 +65,7 @@ class Login extends Component {
           <View style={{flexDirection: 'row'}}>
             <Input
               placeholder="Password"
+              placeholderTextColor="#8394A5"
               style={styles.input}
               secureTextEntry={true}
               value={password}
@@ -143,10 +145,10 @@ class Login extends Component {
 }
 
 const styles = StyleSheet.create({
-  title: {fontSize: 30, color: '#ADB5BD'},
+  title: {fontSize: 30, color: '#F7F8F9'},
   icons: {
     fontSize: 24,
-    color: '#ADB5BD',
+    color: '#EFF2F4',
   },
   containerButtons: {
     alignItems: 'center',
@@ -181,7 +183,7 @@ const styles = StyleSheet.create({
   registerButtontext: {
     textAlign: 'center',
     fontSize: 20,
-    color: '#6C757D',
+    color: '#A6B2BE',
   },
 });
 
