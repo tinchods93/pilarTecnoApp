@@ -1,5 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {MapTypeBtn} from '../screens/Map';
 import Map from '../screens/Map';
+
 import {createStackNavigator} from '@react-navigation/stack';
 
 const MapStack = createStackNavigator();

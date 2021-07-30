@@ -31,13 +31,13 @@ export default class Home extends Component {
               <TouchableOpacity
                 onPress={() => this._onHomePress()}
                 style={styles.homeButton}>
-                <Text style={styles.homeButtonText}>Principal</Text>
+                <Text style={styles.homeButtonText}>Home</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.homeButton}
                 onPress={() => this.props.navigation.navigate('Profile')}>
-                <Text style={styles.homeButtonText}>Perfil</Text>
+                <Text style={styles.homeButtonText}>Profile</Text>
               </TouchableOpacity>
             </View>
 
@@ -45,13 +45,13 @@ export default class Home extends Component {
               <TouchableOpacity
                 style={styles.homeButton}
                 onPress={() => this.props.navigation.navigate('Posts')}>
-                <Text style={styles.homeButtonText}>Posteos</Text>
+                <Text style={styles.homeButtonText}>Posts</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.homeButton}
                 onPress={() => this.props.navigation.navigate('Map')}>
-                <Text style={styles.homeButtonText}>Mapa</Text>
+                <Text style={styles.homeButtonText}>Map</Text>
               </TouchableOpacity>
             </View>
           </View>
